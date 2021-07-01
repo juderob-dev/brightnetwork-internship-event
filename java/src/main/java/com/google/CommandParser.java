@@ -8,6 +8,7 @@ import java.util.List;
 class CommandParser {
 
   private final VideoPlayer videoPlayer;
+  // i have to create a list instance varable so that the switch will work
 
   CommandParser(VideoPlayer videoPlayer) {
     this.videoPlayer = videoPlayer;
@@ -23,6 +24,8 @@ class CommandParser {
               "type HELP for a list of available commands.");
       return;
     }
+
+    // i have never seen a switch fuction being used like this before
 
     switch (command.get(0).toUpperCase()) {
       case "NUMBER_OF_VIDEOS":
@@ -64,7 +67,7 @@ class CommandParser {
         break;
       case "ADD_TO_PLAYLIST":
         try {
-          this.videoPlayer.addVideoToPlaylist(command.get(1), command.get(2));
+          this.videoPlayer.addVideoToPlaylist(command.get(1), command.get(2));// i have never seen this before
         } catch (ArrayIndexOutOfBoundsException e) {
           System.out.println(
               "Please enter ADD_TO_PLAYLIST command followed by a "

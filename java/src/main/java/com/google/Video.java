@@ -30,4 +30,18 @@ class Video {
   List<String> getTags() {
     return tags;
   }
+ String stringTags(){
+
+    String temp="[";
+    for(int i=0;i<this.tags.size();i++){
+      if (i>=1){
+        temp=temp+" "+this.tags.get(i);
+      }
+      else{
+        temp=temp+this.tags.get(i);
+      }
+    }
+    temp=temp+"]";
+    return temp;
+  }
 }
