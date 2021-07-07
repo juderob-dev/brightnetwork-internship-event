@@ -1,12 +1,14 @@
 <application>
-  <component name="FileTypeManager" version="17">
+  <component name="FileTypeManager" version="18">
     <extensionMap>
       <mapping pattern="MyFrame" type="CLASS" />
       <mapping pattern="Form" type="JAVA" />
       <mapping pattern="shadelookup" type="JavaScript" />
+      <mapping ext="space.kts" type="Kotlin" />
+      <mapping ext="gradle.kts" type="Kotlin" />
+      <mapping ext="main.kts" type="Kotlin" />
       <mapping pattern="form" type="PLAIN_TEXT" />
       <mapping ext="db" type="PLAIN_TEXT" />
-      <mapping ext="qrc" type="XML" />
     </extensionMap>
   </component>
 </application>
