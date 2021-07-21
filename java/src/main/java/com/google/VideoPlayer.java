@@ -1,17 +1,20 @@
 package com.google;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class VideoPlayer {
 
   private final VideoLibrary videoLibrary;
   private Video videoPlaying;
   private String state;
+  private List<VideoPlaylist> playLists;
+
+
 
   public VideoPlayer() {
     this.videoLibrary = new VideoLibrary();
     this.videoPlaying=null;
+    this.playLists=new ArrayList<VideoPlaylist>();
   }
 
   public void numberOfVideos() {
@@ -54,6 +57,17 @@ public class VideoPlayer {
   }
 
   public void playRandomVideo() {
+
+    Random rand= new Random();
+    Video[] arr=new Video[this.videoLibrary.getVideos().size()];
+    arr= this.videoLibrary.getVideos().toArray(arr);
+    Video randomValue=arr[rand.nextInt(arr.length)];
+    String temp=randomValue.getVideoId();
+    this.playVideo(temp);
+
+
+
+
     System.out.println("playRandomVideo needs implementation");
   }
 
@@ -104,20 +118,105 @@ public class VideoPlayer {
   }
 
   public void createPlaylist(String playlistName) {
-    System.out.println("createPlaylist needs implementation");
+    VideoPlaylist playlistNow= new VideoPlaylist(playlistName);
+    if(!(playLists.size()<1)){
+      for( VideoPlaylist playlist:playLists){
+        if(playlistNow.equals(playlist)){
+          System.out.println("Cannot create playlist: playlist with the same name already exists");
+          break;
+        }
+
+      }
+      playLists.add(playlistNow);
+      System.out.println("Successfully created new playlist: "+playlistName);
+    }
+    else{
+      playLists.add(playlistNow);
+      System.out.println("Successfully created new playlist: "+playlistName);
+    }
+
+
   }
 
   public void addVideoToPlaylist(String playlistName, String videoId) {
+    VideoPlaylist playlistNow= new VideoPlaylist(playlistName);
+    try{
+      Video video=videoLibrary.getVideo(videoId);
+
+    }
+    catch(Exception e){
+      System.out.println("Cannot add video to playlist: video does not exist");
+
+    }
+
+
+
+    if(!(playLists.size()<1)){
+      for( VideoPlaylist playlist:playLists){
+        if(playlistNow.equals(playlist)){
+          playlistNow.addVideo(video);
+          System.out.println("Cannot create playlist: playlist with the same name already exists");
+          break;
+        }
+
+      }
+      playLists.add(playlistNow);
+      playlistNow.addVideo(video);
+      System.out.println("Successfully created new playlist: "+playlistName);
+    }
+    else{
+      playLists.add(playlistNow);
+      playlistNow.addVideo(video);
+      System.out.println("Successfully created new playlist: "+playlistName);
+    }
+
+
     System.out.println("addVideoToPlaylist needs implementation");
   }
 
   public void showAllPlaylists() {
-    System.out.println("showAllPlaylists needs implementation");
+    if (!(this.playLists.isEmpty())){
+      System.out.println("Showing all Playlist ");
+      for(VideoPlaylist playlist:playLists){
+        String temp=playlist.getName();
+        System.out.println(temp);
+
+      }
+    }
+
+    System.out.println("No playlist exist yet");
+  }
+  public VideoPlaylist findPlaylist(String playlistName){
+    for(VideoPlaylist playlist:playLists){
+      if (playlist.getName().toLowerCase(Locale.ROOT).equals(playlistName.toLowerCase(Locale.ROOT))){
+        return playlist;
+      }
+    }
+    return null;
+
+
   }
 
   public void showPlaylist(String playlistName) {
+    if(playLists.isEmpty()){
+      if (this.findPlaylist(playlistName)!=null){
+        System.out.println("Showing playlist:"+playlistName);
+        VideoPlaylist temp=this.findPlaylist(playlistName);
+        temp.showVideos();
+      }
+      else{
+        System.out.println("Cannot show playlist");
+
+      }
+
+    }
     System.out.println("showPlaylist needs implementation");
+    else{
+      System.out.println("No playlist exist yet");
+
+    }
   }
+
 
   public void removeFromPlaylist(String playlistName, String videoId) {
     System.out.println("removeFromPlaylist needs implementation");

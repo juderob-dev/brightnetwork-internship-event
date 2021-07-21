@@ -30,7 +30,7 @@ class Video {
   List<String> getTags() {
     return tags;
   }
- String stringTags(){
+  public String stringTags(){
 
     String temp="[";
     for(int i=0;i<this.tags.size();i++){
@@ -44,4 +44,14 @@ class Video {
     temp=temp+"]";
     return temp;
   }
+  @Override
+  public boolean equals(Object object){
+      return (this==object);
+
+  }
+  public String showContent(){
+    String temp= this.getTitle()+" ("+this.getVideoId()+") "+this.stringTags();
+    return temp;
+  }
+
 }
